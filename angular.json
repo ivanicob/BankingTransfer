@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ReactiveForm": {
+    "BankingTransfer": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/reactive-form",
+            "outputPath": "dist/banking-transfer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ReactiveForm:build:production"
+              "browserTarget": "BankingTransfer:build:production"
             },
             "development": {
-              "browserTarget": "ReactiveForm:build:development"
+              "browserTarget": "BankingTransfer:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ReactiveForm:build"
+            "browserTarget": "BankingTransfer:build"
           }
         },
         "test": {
@@ -97,5 +97,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "93217d93-1a2b-4ac4-bc26-076980a7d4c2"
   }
 }

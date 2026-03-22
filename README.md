@@ -1,27 +1,57 @@
-# ReactiveForm
+# 📊 Banking Transfer System - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+This project is a **ReactiveForm** module developed in **Angular 14**, focused on a seamless User Experience (UX) and strict data validation for both National (Portugal) and International operations.
 
-## Development server
+## 🚀 Key Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* **Dynamic IBAN Validation**: Automatically switches between National format (PT50 + 21 digits) and International formats (ISO 13616) based on user selection.
+* **Smart SWIFT/BIC Management**: The field becomes mandatory only for international transfers, including real-time format validation.
+* **UX-Focused Error Handling**: Error messages (e.g., "Invalid Format") only appear after the user leaves the field (`blur`), preventing annoying interruptions while typing.
+* **Adaptive Interface**: Automatic field and state clearing when toggling between account types to prevent incorrect "hybrid" data submissions.
+* **Submission Feedback**: Simulated processing state with a button spinner and automatic smooth scroll to the success message.
+* **UI Normalization**: Custom CSS to ensure `input type="date"` and other native widgets match the project's typography and color palette.
 
-## Code scaffolding
+## 🛠️ Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* **Angular 14** (Reactive Forms & Custom Validators)
+* **Bootstrap 5** & **FontAwesome** (Layout and Icons)
+* **TypeScript** (Business logic and strict typing)
+* **CSS3** (Custom animations and cross-browser styling)
 
-## Build
+## 📋 Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Before you begin, ensure you have the following installed:
+* [Node.js](https://nodejs.org/) (v14 or higher)
+* [Angular CLI](https://angular.io/cli)
 
-## Running unit tests
+## 🔧 Installation and Execution
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1.  **Clone the repository**:
+    ``` bash
+    git clone [https://github.com/your-username/banking-transfer-angular.git](https://github.com/your-username/banking-transfer-angular.git)
+    ```
 
-## Running end-to-end tests
+2.  **Install dependencies**:
+    ``` bash
+    npm install
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3.  **Run the application**:
+    ``` bash
+    ng serve
+    ```
+    Access `http://localhost:4200/` in your browser.
 
-## Further help
+## 💡 Logic Breakdown
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The system uses a custom `ibanValidator` that accesses the form's context to decide which Regex rule to apply:
+
+```typescript
+// Validation logic snippet
+if (accountType === 'NATIONAL') {
+  const ptRegex = /^PT50\d{21}$/; // Portuguese standard
+  return ptRegex.test(value) ? null : { invalidIbanPT: true };
+} else {
+  const intRegex = /^[A-Z]{2}[0-9A-Z]{12,34}$/; // International standard
+  return intRegex.test(value) ? null : { invalidIbanInt: true };
+}

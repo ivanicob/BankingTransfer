@@ -1,0 +1,148 @@
+<div class="form-card">
+  
+  <h1 class="main-title">
+    <i class="fas fa-university title-icon" aria-hidden="true"></i> Banking Transfer
+  </h1>
+
+  <div *ngIf="showSuccess" class="alert alert-success bounce-in">
+    <i class="fas fa-check-circle"></i>
+    <div>
+      <strong>Success!</strong> Your transfer has been processed.
+    </div>
+    <button type="button" class="btn-close" (click)="showSuccess = false"></button>
+  </div>  
+
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" class="transfer-form">
+    
+    <fieldset formGroupName="beneficiary">
+      <legend>Beneficiary Information</legend>
+      
+      <div class="form-group">
+        <label>Beneficiary Name *</label>
+        <input formControlName="name" 
+              class="form-control" 
+              placeholder="Full Name"
+              (input)="filterAlphabetical($event)">
+      </div>
+
+      <div class="form-group">
+        <label for="accountType">Account Type *</label>
+        <select formControlName="accountType" id="accountType" class="form-control">
+          <option [value]="AccountType.NATIONAL">National</option>
+          <option [value]="AccountType.INTERNATIONAL">International</option>
+        </select>
+      </div>
+
+      <div *ngIf="transferForm.get('beneficiary.accountType')?.value === AccountType.INTERNATIONAL" class="swift-alert">
+        <label>
+          <i class="fas fa-exclamation-triangle"></i>
+          SWIFT Code Required for International Transfers
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset formGroupName="details">
+      <legend>Transfer Details</legend>
+      
+      <div class="form-group">
+        <label>Amount *</label>
+        <div class="currency-input-wrapper">
+          <span class="currency-symbol">€</span>        
+          <input  type="number" 
+                  formControlName="amount" 
+                  class="form-control with-symbol"
+                  placeholder="0.00"
+                  (blur)="formatCurrency($event)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Transfer Date *</label>
+        <input type="date" 
+               formControlName="transferDate" 
+               class="form-control"
+               [min]="today"
+               (blur)="transferForm.get('details.transferDate')?.markAsTouched()">
+
+               <div *ngIf="transferForm.get('details.transferDate')?.errors?.['pastDate'] && transferForm.get('details.transferDate')?.touched" 
+                  class="alert alert-warning mt-2">
+                  <label>
+                    <i class="fas fa-calendar-times"></i> Date cannot be in the past.
+                  </label>
+              </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>
+          {{ transferForm.get('beneficiary.accountType')?.value === AccountType.NATIONAL ? 'IBAN (Portugal) *' : 'IBAN / Account Number (International) *' }}
+        </label>
+        <input formControlName="iban" 
+               class="form-control" 
+               [placeholder]="transferForm.get('beneficiary.accountType')?.value === AccountType.NATIONAL ? 'PT50 0000 0000 0000 0000 0000 0' : 'Enter International IBAN'"
+               (blur)="transferForm.get('beneficiary.iban')?.markAsTouched()"
+               (input)="handleIBANInput($event)">
+        
+          <div *ngIf="transferForm.get('beneficiary.iban')?.hasError('invalidIbanPT') && transferForm.get('beneficiary.iban')?.touched" 
+               class="alert alert-warning mt-2">
+              <label>
+                <i class="fas fa-exclamation-triangle"></i> IBAN must start with PT50 followed by 21 digits.
+              </label>
+          </div>
+        
+          <div *ngIf="transferForm.get('beneficiary.iban')?.hasError('invalidIbanInt') && transferForm.get('beneficiary.iban')?.touched" 
+               class="alert alert-warning mt-2">
+              <label>
+                <i class="fas fa-exclamation-triangle"></i> Invalid International IBAN format (e.g., FR76...).
+              </label>
+          </div>
+      </div>
+
+      <div *ngIf="transferForm.get('beneficiary.accountType')?.value === AccountType.INTERNATIONAL" class="form-group mt-3">
+        <label for="swiftCode">SWIFT/BIC Code (e.g AAAABB11) *</label>
+        <input formControlName="swiftCode" 
+          id="swiftCode"
+          class="form-control" 
+          placeholder="SWIFT/BIC"
+          (focus)="onSwiftFocus()"
+          (blur)="transferForm.get('details.swiftCode')?.markAsTouched()">
+
+        <div *ngIf="transferForm.get('details.swiftCode')?.invalid && 
+                    transferForm.get('details.swiftCode')?.touched && 
+                    transferForm.get('details.swiftCode')?.value" 
+          class="alert alert-warning mt-2">
+          <label>
+            <i class="fas fa-exclamation-triangle"></i> Invalid SWIFT format.
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    
+    <div class="submit-container mt-4">
+      <button type="submit" 
+              [disabled]="transferForm.invalid || isSubmitting" 
+              class="btn btn-primary"
+              [class.loading]="isSubmitting">
+        
+        <ng-container *ngIf="!isSubmitting">
+          <i class="fas fa-paper-plane"></i>
+          <span>Confirm Transfer</span>
+        </ng-container>      
+
+        <ng-container *ngIf="isSubmitting">
+          <span *ngIf="isSubmitting" class="spinner">
+            <i class="fas fa-circle-notch fa-spin"></i> Processing...
+          </span>  
+        </ng-container>
+      </button>
+    </div>
+
+  </form>
+  <!--
+  <pre>Status Form: {{ transferForm.valid }}</pre>
+  <pre>Erros Name: {{ transferForm.get('beneficiary.name')?.errors | json }}</pre>
+  <pre>Erros Amount: {{ transferForm.get('details.amount')?.errors | json }}</pre>
+  <pre>Erros IBAN: {{ transferForm.get('details.iban')?.errors | json }}</pre>
+  <pre>Erros Transfer Date: {{ transferForm.get('details.transferDate')?.errors | json }}</pre>
+  <pre>Erros SWIFT: {{ transferForm.get('details.swiftCode')?.errors | json }}</pre>
+  -->
+</div>

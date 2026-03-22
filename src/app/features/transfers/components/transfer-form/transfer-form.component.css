@@ -1,0 +1,250 @@
+/* Main form card */
+  
+  :host {
+    display: contents;
+  }
+
+  .main-title {
+    color: #1a531e; /* Dark green from headers */
+    display: flex;
+    align-items: normal;
+    justify-content: left;
+    gap: 15px;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .main-title i {
+    font-size: 30px;
+    color: #1a531e;
+  }
+
+  .main-title label {
+    font-size: 35px;
+    font-weight: 700;
+    color: #1a531e;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  
+  .title-icon {
+    color: #2e7d32; /* Main branding green */
+    font-size: 2rem;
+    opacity: 0.9;
+  }
+  
+  /* Form element styling */
+  .transfer-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  fieldset {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+  }
+  
+  .form-group {
+    width: 100%;
+  }
+  
+  legend {
+    font-weight: bold;
+    color: #555;
+    padding: 0 10px;
+  }
+  
+  .form-group {
+    width: 100%;
+  }
+  
+  label {
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .form-control {
+    width: 100% !important;
+    display: flex;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+  }
+  
+  /* Error/Alert Styles */
+  .error-msg {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .swift-alert {
+    background-color: #fff3e0;
+    color: #e65100;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 4px solid #ff9800;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .swift-alert i {
+    margin-right: 5px;
+  }
+  
+  /* Button Styling */
+  .btn-primary {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: #1a531e;
+    cursor: auto;
+  }
+  
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  
+  .btn-primary:disabled {
+    background-color: #969393;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  input[formControlName="name"]:not(:placeholder-shown) {
+    text-transform: uppercase;
+  }
+
+  input[formControlName="swiftCode"] {
+    text-transform: uppercase;
+  }
+
+  .currency-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .currency-symbol {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .form-control.with-symbol {
+    padding-left: 35px !important;
+  }
+
+  .alert-warning {
+    background-color: #fff3e0;
+    border-left: 4px solid #ff9800;
+    color: #e65100;
+    padding: 10px 15px;
+    margin-top: 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .alert-warning i {
+    margin-right: 5px;
+  }
+
+  .alert-success {
+    background-color: #d4edda;
+    border-left: 5px solid #28a745;
+    color: #155724;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: bounceIn 0.5s ease;
+}
+
+.btn-submit.loading {
+    background-color: #94ea97 !important;
+    cursor: wait !important;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.btn-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #155724;
+}
+
+input[type="date"],
+.form-control {
+    font-family: inherit;
+    color: #212529;      
+    font-size: 16px;      
+    -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #212529;
+}
+
+@media (max-width: 480px) {
+  .main-title {
+      gap: 8px;
+      margin-bottom: 15px;
+  }
+
+  .main-title i {
+      font-size: 30px;
+  }
+
+  .main-title label {
+      font-size: 18px !important;
+      letter-spacing: -0.5px;
+  }
+}
