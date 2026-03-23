@@ -42,6 +42,21 @@ Before you begin, ensure you have the following installed:
     ```
     Access `http://localhost:4200/` in your browser.
 
+## 🖼️ Screenshots
+
+<p float="center">
+  <img src="./images/web_01.png" width="32%" alt="web_01" style="zoom: 32%;"/>
+  <img src="./images/web_02.png" width="32%" alt="web_02" style="zoom: 32%;"/>
+  <img src="./images/web_03.png" width="32%" alt="web_03" style="zoom: 32%;"/>
+</p>
+
+<p float="center">
+  <img src="./images/web_04.png" width="32%" alt="web_04" style="zoom: 32%;"/>
+  <img src="./images/web_05.png" width="32%" alt="web_05" style="zoom: 32%;"/>
+  <img src="./images/web_06.png" width="32%" alt="web_06" style="zoom: 32%;"/>
+  <img src="./images/web_07.png" width="32%" alt="web_07" style="zoom: 32%;"/>
+</p>
+
 ## 💡 Logic Breakdown
 
 The system uses a custom `ibanValidator` that accesses the form's context to decide which Regex rule to apply:
