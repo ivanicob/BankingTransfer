@@ -55,6 +55,7 @@ Before you begin, ensure you have the following installed:
   <img src="./images/web_05.png" width="32%" alt="web_05" style="zoom: 32%;"/>
   <img src="./images/web_06.png" width="32%" alt="web_06" style="zoom: 32%;"/>
   <img src="./images/web_07.png" width="32%" alt="web_07" style="zoom: 32%;"/>
+  <img src="./images/web_08.jpg" width="32%" alt="web_08" style="zoom: 32%;"/>
 </p>
 
 ## 💡 Logic Breakdown
